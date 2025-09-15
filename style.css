@@ -1,0 +1,24 @@
+.photo-wrapper{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+  height:100%;
+  overflow:visible; /* permite que fotos fiquem fora do container */
+}
+
+.photo-wrapper img{
+  position:absolute;
+  border-radius:12px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  opacity:0;
+  transform:scale(0.5);
+  transition:all 0.8s ease;
+  object-fit:contain; /* garante que imagem não seja cortada */
+}
+
+.photo-wrapper img.show{
+  opacity:1;
+  transform:scale(1);
+}

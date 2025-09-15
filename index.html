@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dia 23</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='red'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./style.css">
+
+  <style>
+    :root{
+      --bg:#f7efe6;
+      --paper:#fffdf7;
+      --accent:#c84b6a;
+      --muted:#6b5b50;
+      --shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Merriweather',serif;background:linear-gradient(180deg,#f3e9e2 0%,var(--bg) 100%);color:var(--muted);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+
+    .stage{width:100%;max-width:980px;position:relative;display:flex;flex-direction:column;align-items:center;}
+
+    .envelope-wrap{display:flex;flex-direction:column;align-items:center;gap:18px}
+    .envelope{width:360px;height:240px;position:relative;background:var(--paper);border-radius:8px;box-shadow:var(--shadow);overflow:hidden;border:1px solid rgba(0,0,0,0.06);transition:transform 1s ease;}
+    .flap{position:absolute;left:0;right:0;top:0;height:55%;background:linear-gradient(180deg,#fff 0%,#fee6ee 100%);transform-origin:top center;transition:transform 900ms cubic-bezier(.2,.9,.2,1);display:flex;align-items:center;justify-content:center}
+    .flap.open{transform:translateY(-5%) rotateX(-180deg);}
+    .seal{position:absolute;top:50%;left:50%;transform:translate(-50%,-10%);width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #ffeff5, #ff9fb0);display:flex;align-items:center;justify-content:center;font-family:'Great Vibes',cursive;font-size:28px;color:white;box-shadow:0 8px 20px rgba(200,75,106,0.28);transition:all 0.8s ease;}
+
+    .open-btn{background:transparent;border:2px solid var(--accent);padding:10px 18px;border-radius:999px;cursor:pointer;font-weight:700;color:var(--accent);letter-spacing:0.6px;margin-top:10px;transition:all 0.3s ease}
+    .open-btn:hover{background:var(--accent);color:white;}
+
+    /* Carta */
+    .letter{margin-top:20px;background:var(--paper);padding:28px;border-radius:12px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.04);opacity:0;transform:translateY(20px);transition:all 700ms ease;position:relative;z-index:2;}
+    .letter.show{opacity:1;transform:translateY(0)}
+
+    .letter header{display:flex;align-items:center;gap:18px}
+    .avatar{width:84px;height:84px;border-radius:12px;overflow:hidden;flex:0 0 84px}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .letter h1{font-family:'Dancing Script',cursive;margin:0;font-size:44px;color:var(--accent)}
+    .letter p.lead{margin:8px 0 18px;font-size:18px;line-height:1.5}
+
+    .effects{display:flex;gap:8px;margin-top:12px}
+    .btn{padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:white;cursor:pointer;transition:all 0.3s ease;}
+    .btn:hover{background:#b03b5e;}
+
+    .typewriter{font-family:'Great Vibes',cursive;font-size:28px;min-height:40px}
+
+    footer{margin-top:16px;font-size:13px;color:#8b7b72;text-align:center}
+
+    /* Fotos ao redor */
+    .photo-wrapper{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;pointer-events:none;z-index:1;}
+    .photo-wrapper img{
+      position:absolute;
+      width:120px;
+      height:80px;
+      object-fit:cover;
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      opacity:0;
+      transform:scale(0.5);
+      transition:all 0.8s ease;
+    }
+    .photo-wrapper img.show{opacity:1;transform:scale(1);}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="envelope-wrap">
+      <div class="envelope" aria-hidden="true">
+        <div id="flap" class="flap">
+          <div style="text-align:center">
+            <div style="font-family:'Great Vibes',cursive;font-size:28px;color:var(--accent)">Uma carta</div>
+            <div style="font-size:13px;color:var(--muted)">abra para descobrir...</div>
+          </div>
+        </div>
+        <div class="seal">❤</div>
+      </div>
+      <button id="openNow" class="open-btn">Abrir agora</button>
+    </div>
+
+    <!-- Carta -->
+    <div id="unlockedArea" class="letter" role="main">
+      <header>
+        <div class="avatar"><img id="avatarImg" src="./src/classicu 2025-08-09 205505.759.jpeg" alt="Nossa foto"></div>
+        <div>
+          <h1>Feliz nosso dia, meu bem</h1>
+          <p class="lead">Cada palavra aqui foi escolhida pensando em nós, não esqueça de imprimir e colocar no muralzinho do seu quarto.</p>
+        </div>
+      </header>
+
+      <div class="typewriter" id="typewriter"></div>
+
+      <div class="effects">
+        <button class="btn" id="printBtn">Imprimir carta</button>
+      </div>
+
+      <footer>Obrigado por me amar, com todo amor e carinho — <em>Patrik Lima</em></footer>
+    </div>
+
+    
+<!-- Fotos ao redor da carta -->
+<div class="photo-wrapper" id="photoWrapper" style="pointer-events:none; z-index:1;">
+  <img src="./src/IMG_7541.jpeg" style="top:-150px; left:50%; transform:translateX(-50%); width:280px; height:auto; object-fit:contain;" alt="">
+  <img src="./src/classicu 2025-08-09 202301.326.jpeg" style="top:50%; left:-160px; transform:translateY(-50%); width:280px; height:auto; object-fit:contain;" alt="">
+  <img src="./src/classicu 2025-08-09 205139.178.jpeg" style="top:50%; right:-160px; transform:translateY(-50%); width:280px; height:auto; object-fit:contain;" alt="">
+  <img src="./src/classicu 2025-08-09 205505.759.jpeg" style="bottom:-150px; left:50%; transform:translateX(-50%); width:280px; height:auto; object-fit:contain;" alt="">
+  <img src="./src/IMG_2628.png" style="top:-180px; left:-140px; width:250px; height:auto; object-fit:contain;" alt="">
+  <img src="./src/89284.jpg" style="top:-180px; right:-140px; width:250px; height:auto; object-fit:contain;" alt="">
+</div>
+
+
+
+
+  </div>
+
+  <script>
+    const LETTER_TEXT = [
+      "Meu amor,",
+      "Hoje eu quis escrever em papel digital tudo aquilo que sinto por você.",
+      "Quando você abrir isso, quero que saiba que você é a melhor parte dos meus dias.",
+      "Eu não sou o melhor namorado do mundo, não sou perfeito (ninguém é né) e às vezes posso machucá-la internamente ou silenciosamente, com alguma palavra, mas não é que eu esteja tentando acabar com tudo. É que, como expliquei na última conversa que tivemos, eu realmente tenho uma insegurança e às vezes isso me atrapalha, pois me deixa pensar que algo que não vai acontecer poderia acontecer, e isso às vezes é uma bomba dentro de mim e fala mais alto. Enfim, como todas as vezes em que eu machuquei você de alguma forma, aqui estou mais uma vez para pedir desculpas e, como homem, falar o que eu sempre falo: que você é a melhor coisa que poderia ter acontecido na minha vida. A vida com você é algo mágico, gostoso de se viver e hoje completamos mais um mês juntos. Sempre que chega essa data eu me sinto na obrigação de fazer algo para demonstrar isso para você, mesmo que seja apenas uma carta ou algumas palavras. Tudo é do fundo do meu coração, cada sentimento por você, cada palavra que sai da minha boca para falar o quanto eu te amo, tudo é a mais pura verdade do meu amor. Eu tenho esse dever, de fazer você se sentir amada, feliz, e tudo de bom. Eu escolhi isso e escolho todos os dias. Às vezes não depende de mim, às vezes sou eu que estrago algum momento, mas sempre estamos mais fortes, sempre nos acertamos de alguma maneira. É isso, querida, espero que não ache minhas cartinhas repetidas. Fico sem palavras, às vezes é um pouco difícil falar do que sinto, mas em questão disso é mais fácil para mim falar do meu amor por você.",
+      "Te amo mais que tudo, minha princesa.",
+      "Você é linda."
+    ];
+
+    const flap = document.getElementById('flap');
+    const openNow = document.getElementById('openNow');
+    const printBtn = document.getElementById('printBtn');
+    const typewriter = document.getElementById('typewriter');
+    const unlockedArea = document.getElementById('unlockedArea');
+    const photos = document.querySelectorAll('#photoWrapper img');
+    const seal = document.querySelector('.seal');
+
+    openNow.addEventListener('click', ()=>{
+      flap.classList.add('open');
+      unlockedArea.classList.add('show');
+      seal.style.transform = 'scale(0)';
+      seal.style.opacity = '0';
+      startTypewriter();
+
+      // mostrar fotos com delay
+      photos.forEach((img,i)=>{
+        setTimeout(()=>img.classList.add('show'), 300 + i*200);
+      });
+    });
+
+    async function startTypewriter(){
+      typewriter.innerHTML = '';
+      for(const line of LETTER_TEXT){
+        await writeLine(line);
+      }
+    }
+
+    function writeLine(text){
+      return new Promise(resolve=>{
+        let i=0;
+        const el = document.createElement('div'); 
+        el.style.marginTop='6px'; 
+        el.style.whiteSpace='pre-wrap'; 
+        el.style.letterSpacing='0.6px'; 
+        el.style.fontSize='20px';
+        typewriter.appendChild(el);
+        function step(){
+          if(i<=text.length){
+            el.textContent = text.slice(0,i)+'▌';
+            i++;
+            setTimeout(step, 50 + Math.random()*40);
+          } else {
+            el.textContent = text;
+            setTimeout(resolve, 350);
+          }
+        }
+        step();
+      });
+    }
+
+    printBtn.addEventListener('click', ()=>{ window.print(); });
+  </script>
+</body>
+</html>
